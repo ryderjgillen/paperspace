@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "./grpc";
+
+service PortInfo {
+  rpc GetPortInfo (PortInfoRequest) returns (stream PortInfoResponse) {}
+}
+
+enum Protocol {
+  TCP = 0;
+  UDP = 1;
+}
+
+message PortInfoRequest {
+  Protocol Protocol = 1;
+}
+
+message IpPort {
+  string IpAddress = 1;
+  uint32 Port = 2;
+}
+
+message PortInfoResponse {
+  IpPort Source = 1;
+  IpPort Destination = 2;
+  Protocol Protocol = 3;
+  string Command = 4;
+}

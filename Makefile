@@ -1,9 +1,9 @@
 
 
-build-client: build-protoc
+build-client: build-grpc
 	@docker build -f ./client.Dockerfile -t port-service-client ./src
 
-build-service: build-protoc
+build-service: build-grpc
 	@docker build -f ./service.Dockerfile -t port-service ./src
 
 build-grpc:
@@ -13,4 +13,4 @@ run-client:
 	@docker run --network=host port-service-client
 
 run-service:
-	@docker run port-service
+	@docker run --network=host port-service
