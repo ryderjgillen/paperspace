@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "src/grpc"
+		},
+		{
+			"path": "src/service"
+		},
+		{
+			"path": "src/client"
+		}
+	],
+	"settings": {}
+}
