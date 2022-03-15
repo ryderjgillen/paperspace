@@ -3,15 +3,13 @@ package main
 import (
 	"context"
 	"flag"
-	"fmt"
 	"log"
 	"os"
 	"os/signal"
-	"syscall"
-	"time"
-
 	"portService/server/grpc"
 	"portService/server/prom"
+	"syscall"
+	"time"
 )
 
 type config struct {
@@ -27,11 +25,11 @@ func parseConfig(args []string) (config, error) {
 	flags := flag.NewFlagSet(args[0], flag.ExitOnError)
 
 	var (
-		dataInterval = flags.Duration("dataInterval", 15*time.Second, "port data refresh interval")
+		dataInterval = flags.Duration("data-interval", 15*time.Second, "port data refresh interval")
 		address      = flags.String("address", "", "GRPC server listen address")
 		port         = flags.Uint("port", 59001, "GRPC server listen port")
-		promAddress  = flags.String("promAddress", "", "Prometheus metrics endpoint listen address")
-		promPort     = flags.Uint("promPort", 59002, "Prometheus metrics endpoint listen port")
+		promAddress  = flags.String("prom-address", "", "Prometheus metrics endpoint listen address")
+		promPort     = flags.Uint("prom-port", 59002, "Prometheus metrics endpoint listen port")
 	)
 
 	if err := flags.Parse(args[1:]); err != nil {
@@ -59,8 +57,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("error reading config: %s", err.Error())
 	}
-
-	fmt.Println(config)
 
 	defer func() {
 		signal.Stop(signalChan)
@@ -111,6 +107,8 @@ func main() {
 				}
 			case syscall.SIGINT:
 				cancel()
+
+				log.Fatal((<-errCh).Error())
 			}
 		case err = <-errCh:
 			log.Fatal(err.Error())
