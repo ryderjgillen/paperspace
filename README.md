@@ -19,16 +19,16 @@ You can override the defaults by passings the following flags
 
 - `-address localhost` -- sets the address the GRPC service will listen for requests on
 
-- `-port 550155` -- sets the port the GRPC service will listen for requests on
+- `-port 59001` -- sets the port the GRPC service will listen for requests on
 
 - `--prom-address localhost` -- sets the address that prometheus will listen for requests to the `/metrics` endpoint on
 
-- `--prom-port 22122` -- sets the port that prometheus will listen for requests to the `/metrics` endpoint on
+- `--prom-port 59002` -- sets the port that prometheus will listen for requests to the `/metrics` endpoint on
 
 ### Client
 
 A simple client has been created to aid in testing. The client will poll the service for data at a specificed interval, printing the results to STDOUT.
 
-- `docker run --network=host port-service-client poll` -- polls the service on an interval using the default port (55001).
+- `docker run --network=host port-service-client poll` -- polls the service on an interval using the default port (59001).
 
 - `docker run --network=host port-service-client poll --help` -- displays detailed help (there are a few flags that override the defaults, be sure to check them out)
