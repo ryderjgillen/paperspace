@@ -12,7 +12,6 @@ enum Protocol {
 }
 
 message PortInfoRequest {
-  Protocol Protocol = 1;
 }
 
 message IpPort {
