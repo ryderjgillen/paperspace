@@ -8,10 +8,13 @@ import (
 	"time"
 )
 
-func Taest_promServer_cancel(t *testing.T) {
+func Test_promServer_cancel(t *testing.T) {
 
 	//given
-	promServer := prom.NewPromServer("", 0)
+	promServer := prom.NewPromServer(prom.PromServerConfig{
+		Address: "",
+		Port:    0,
+	})
 	ctx, cancel := context.WithCancel(context.Background())
 
 	//when
@@ -19,7 +22,7 @@ func Taest_promServer_cancel(t *testing.T) {
 	err := promServer.Run(ctx)
 
 	//then
-	if err != nil && err != context.Canceled {
+	if err != nil {
 		t.Fatalf(err.Error())
 	}
 }
@@ -27,7 +30,10 @@ func Taest_promServer_cancel(t *testing.T) {
 func Test_promServer_200(t *testing.T) {
 
 	//given
-	promServer := prom.NewPromServer("", 65535)
+	promServer := prom.NewPromServer(prom.PromServerConfig{
+		Address: "",
+		Port:    65535,
+	})
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
@@ -39,8 +45,8 @@ func Test_promServer_200(t *testing.T) {
 	}()
 
 	//then
-	time.Sleep(1 * time.Second)
-	res, err := http.Get("http://0.0.0.0:65535/metrics")
+	time.Sleep(500 * time.Millisecond)
+	res, err := http.Get("http://:65535/metrics")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}

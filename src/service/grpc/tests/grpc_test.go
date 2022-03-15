@@ -10,7 +10,6 @@ import (
 
 func Test_GrpcServer(t *testing.T) {
 
-	//service := grpc.NewGrpcService(nil)
 	data := []*pb.PortInfoResponse{
 		{Command: "cmd1", Protocol: pb.Protocol_UDP, Source: &pb.IpPort{IpAddress: "source1", Port: 1}, Destination: &pb.IpPort{IpAddress: "dest1", Port: 2}},
 		{Command: "cmd2", Protocol: pb.Protocol_TCP, Source: &pb.IpPort{IpAddress: "source2", Port: 3}, Destination: &pb.IpPort{IpAddress: "dest2", Port: 4}},
@@ -24,7 +23,7 @@ func Test_GrpcServer(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 
 	go func() {
-		time.Sleep(5 * time.Second)
+		time.Sleep(1 * time.Second)
 		cancel()
 	}()
 	err := server.Run(ctx)

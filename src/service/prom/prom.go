@@ -19,12 +19,12 @@ type promServer struct {
 
 func NewPromServer(config PromServerConfig) promServer {
 
-	http.Handle("/metrics", promhttp.Handler())
+	mux := http.NewServeMux()
+	mux.Handle("/metrics", promhttp.Handler())
 
 	service := promServer{
-		httpServer: &http.Server{Addr: fmt.Sprintf("%s:%d", config.Address, config.Port)},
+		httpServer: &http.Server{Addr: fmt.Sprintf("%s:%d", config.Address, config.Port), Handler: mux},
 	}
-
 	return service
 }
 
@@ -41,7 +41,7 @@ func (s promServer) Run(ctx context.Context) error {
 	}()
 
 	go func() {
-		if err := s.httpServer.ListenAndServe(); err != http.ErrServerClosed {
+		if err := s.httpServer.ListenAndServe(); err != nil {
 			errCh <- err
 		}
 	}()

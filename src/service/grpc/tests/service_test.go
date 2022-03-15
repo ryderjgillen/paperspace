@@ -25,13 +25,14 @@ func (s portInfo_GetPortInfoServer) Send(resp *pb.PortInfoResponse) error {
 
 type serviceData struct {
 	data []*pb.PortInfoResponse
+	err  error
 }
 
-func (d serviceData) Get() []*pb.PortInfoResponse {
-	return d.data
+func (d serviceData) Get() ([]*pb.PortInfoResponse, error) {
+	return d.data, d.err
 }
 
-func aTest_GrpcService(t *testing.T) {
+func Test_GrpcService(t *testing.T) {
 
 	//given
 	data := []*pb.PortInfoResponse{
