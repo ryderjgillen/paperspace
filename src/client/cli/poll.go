@@ -20,7 +20,7 @@ type PollCmd struct {
 	Port        int           `kong:"default='59001'"`
 	PromAddress string        `kong:"default=''"`
 	PromPort    int           `kong:"default='59002'"`
-	ShowMetrics bool          `kong:"default='false'"`
+	ShowMetrics bool          `kong:"default='true'"`
 }
 
 func (cmd *PollCmd) Run(_ *Context) error {

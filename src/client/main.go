@@ -1,8 +1,6 @@
 package main
 
 import (
-	"os"
-
 	"github.com/alecthomas/kong"
 
 	"portService/client/cli"
@@ -13,7 +11,6 @@ var CLI struct {
 }
 
 func main() {
-	os.Args = []string{"prot-service-client", "poll"}
 	ctx := kong.Parse(&CLI)
 	err := ctx.Run(&cli.Context{})
 	ctx.FatalIfErrorf(err)
