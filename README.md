@@ -21,9 +21,9 @@ You can override the defaults by passings the following flags
 
 - `-port 59001` -- sets the port the GRPC service will listen for requests on
 
-- `--prom-address localhost` -- sets the address that prometheus will listen for requests to the `/metrics` endpoint on
+- `-prom-address localhost` -- sets the address that prometheus will listen for requests to the `/metrics` endpoint on
 
-- `--prom-port 59002` -- sets the port that prometheus will listen for requests to the `/metrics` endpoint on
+- `-prom-port 59002` -- sets the port that prometheus will listen for requests to the `/metrics` endpoint on
 
 ### Client
 
