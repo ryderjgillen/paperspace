@@ -25,8 +25,6 @@ type grpcServer struct {
 
 func NewGrpcServer(grpcService *grpcService, config GrpcServerConfig) grpcServer {
 
-	fmt.Println(config)
-
 	grpcServer := grpcServer{
 		config:      config,
 		grpcService: grpcService,
@@ -52,7 +50,6 @@ func (s *grpcServer) Run(ctx context.Context) error {
 	}()
 
 	var lc net.ListenConfig
-	fmt.Println(s.config.Port)
 	lis, err := lc.Listen(ctx, "tcp", fmt.Sprintf("%s:%d", s.config.Address, s.config.Port))
 
 	if err != nil {
