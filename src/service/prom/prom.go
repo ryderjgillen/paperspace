@@ -31,7 +31,6 @@ func NewPromServer(config PromServerConfig) promServer {
 func (s promServer) Run(ctx context.Context) error {
 
 	errCh := make(chan error, 1)
-	defer close(errCh)
 
 	go func() {
 		select {
